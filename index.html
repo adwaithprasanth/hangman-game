@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <div id="setup-container">
+        <div id="mode-selection">
+            <h2>Choose a Game Mode</h2>
+            <button id="vs-computer-btn" class="mode-btn">Play vs. Computer</button>
+            <button id="challenge-btn" class="mode-btn">Challenge a Friend</button>
+        </div>
+
+        <div id="word-input-container" class="hidden">
+            <h2>Enter a Word for Your Friend to Guess</h2>
+            <input type="password" id="custom-word-input" placeholder="Type a word...">
+            <div class="button-group">
+                <button id="start-custom-game-btn" class="mode-btn">Start Game</button>
+                <button id="back-btn" class="mode-btn secondary">Back</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-game-container" class="hidden">
+        <h1>Hangman</h1>
+        <p>Guess the hidden word before the man is hanged!</p>
+
+        <div class="game-container">
+            <svg height="250" width="200" class="hangman-figure">
+                <line x1="60" y1="20" x2="140" y2="20" />
+                <line x1="140" y1="20" x2="140" y2="50" />
+                <line x1="60" y1="20" x2="60" y2="230" />
+                <line x1="20" y1="230" x2="100" y2="230" />
+
+                <circle cx="140" cy="70" r="20" class="figure-part" />
+                <line x1="140" y1="90" x2="140" y2="150" class="figure-part" />
+                <line x1="140" y1="120" x2="120" y2="100" class="figure-part" />
+                <line x1="140" y1="120" x2="160" y2="100" class="figure-part" />
+                <line x1="140" y1="150" x2="120" y2="180" class="figure-part" />
+                <line x1="140" y1="150" x2="160" y2="180" class="figure-part" />
+            </svg>
+
+            <div id="word-display"></div>
+
+            <div id="keyboard"></div>
+        </div>
+
+        <div id="popup-container" class="popup-container">
+            <div class="popup">
+                <h2 id="final-message"></h2>
+                <button id="play-again-btn">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
