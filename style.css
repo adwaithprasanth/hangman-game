@@ -167,15 +167,28 @@ h1, h2 {
 }
 
 #word-input-container input {
-  display: block;
-  margin: 10px auto;
-  padding: 10px;
-  width: 250px;
-  font-size: 16px;
-  border: 1px solid #333;
-  border-radius: 6px;
-  background: #1f1f1f;
-  color: var(--text-color);
+    background: #1f1f1f;
+    color: var(--text-color);
+    border: 3px solid var(--text-color);
+    border-radius: 0; /* Sharp corners for the retro feel */
+    padding: 15px;
+    width: 300px;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    outline: none; /* Removes the default blue glow on click */
+    transition: all 0.2s ease;
+    margin: 20px auto;
+}
+
+#word-input-container input:focus {
+    border-color: var(--accent-color); /* Highlights with your theme color */
+    box-shadow: 0 0 10px var(--accent-color);
+}
+
+#word-input-container input::placeholder {
+    color: #555;
+    font-family: 'Poppins', sans-serif;
 }
 
 .mode-btn {
