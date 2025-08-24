@@ -1,11 +1,11 @@
 /* === Theme Variables === */
 :root {
-  --bg-color: #121212;        /* Deep black background */
-  --text-color: #E0E0E0;      /* Light gray text */
-  --accent-color: #00FF9F;    /* Neon green for highlights */
-  --error-color: #FF3860;     /* Bright red for wrong guesses */
-  --button-color: #FF9F1C;    /* Warm orange buttons */
-  --button-text: #121212;     /* Dark text on buttons */
+  --bg-color: #121212;        
+  --text-color: #E0E0E0;      
+  --accent-color: #00FF9F;    
+  --error-color: #FF3860;     
+  --button-color: #FF9F1C;    
+  --button-text: #121212;     
 }
 
 /* === Global Styles === */
@@ -24,7 +24,7 @@ body {
 
 h1, h2 {
   margin-bottom: 0;
-  font-family: 'Press Start 2P', monospace; /* Retro arcade font */
+  font-family: 'Press Start 2P', monospace;
 }
 
 /* === Game Container === */
@@ -46,7 +46,7 @@ h1, h2 {
 }
 
 .figure-part {
-  display: none; /* Hidden until guessed wrong */
+  display: none;
 }
 
 /* === Word Display === */
@@ -106,7 +106,7 @@ h1, h2 {
   background-color: rgba(0, 0, 0, 0.6);
   position: fixed;
   inset: 0;
-  display: none; /* Hidden by default */
+  display: none;
   align-items: center;
   justify-content: center;
 }
@@ -210,4 +210,23 @@ h1, h2 {
   h1 { font-size: 20px; }
   h2 { font-size: 16px; }
   #word-input-container input { width: 200px; }
+}
+
+/* === Shake Animation === */
+.shake {
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0% { transform: translate(2px, 2px) rotate(0deg); }
+  10% { transform: translate(-2px, -4px) rotate(-1deg); }
+  20% { transform: translate(-6px, 0px) rotate(1deg); }
+  30% { transform: translate(6px, 4px) rotate(0deg); }
+  40% { transform: translate(2px, -2px) rotate(1deg); }
+  50% { transform: translate(-2px, 4px) rotate(-1deg); }
+  60% { transform: translate(-6px, 2px) rotate(0deg); }
+  70% { transform: translate(6px, 2px) rotate(-1deg); }
+  80% { transform: translate(-2px, -2px) rotate(1deg); }
+  90% { transform: translate(2px, 4px) rotate(0deg); }
+  100% { transform: translate(2px, -4px) rotate(-1deg); }
 }
