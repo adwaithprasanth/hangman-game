@@ -25,13 +25,11 @@ body {
 h1, h2 {
   margin-bottom: 0;
   font-family: 'Press Start 2P', monospace;
-  /* Add these two lines for fluid font sizes */
-  font-size: clamp(1.25rem, 5vw, 2rem); /* For h1 */
-  line-height: 1.4; /* Improves readability */
+  font-size: clamp(1.25rem, 5vw, 2rem);
+  line-height: 1.4;
 }
 
 h2 {
-  /* Make h2 slightly smaller */
   font-size: clamp(1rem, 4vw, 1.5rem);
 }
 
@@ -54,7 +52,9 @@ h2 {
 }
 
 .figure-part {
-  display: none;
+  stroke-dashoffset: 1;
+  stroke-dasharray: 1;
+  opacity: 0;
 }
 
 /* === Word Display === */
@@ -231,14 +231,27 @@ h2 {
     margin-bottom: 20px;
 }
 
-/* === Mobile Tweaks === */
+/* === Shake Animation === */
+.shake {
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0% { transform: translate(2px, 2px) rotate(0deg); }
+  10% { transform: translate(-2px, -4px) rotate(-1deg); }
+  20% { transform: translate(-6px, 0px) rotate(1deg); }
+  30% { transform: translate(6px, 4px) rotate(0deg); }
+  40% { transform: translate(2px, -2px) rotate(1deg); }
+  50% { transform: translate(-2px, 4px) rotate(-1deg); }
+  60% { transform: translate(-6px, 2px) rotate(0deg); }
+  70% { transform: translate(6px, 2px) rotate(-1deg); }
+  80% { transform: translate(-2px, -2px) rotate(1deg); }
+  90% { transform: translate(2px, 4px) rotate(0deg); }
+  100% { transform: translate(2px, -4px) rotate(-1deg); }
+}
+
+/* === Media Queries === */
 @media (max-width: 768px) {
-
-  #word-display {
-    flex-wrap: wrap;
-    padding: 0 10px;
-  }
-
   .game-container {
     width: 90%;
     padding: 10px;
@@ -259,27 +272,77 @@ h2 {
     height: 32px;
     font-size: 14px;
   }
+  
+  #word-display {
+    flex-wrap: wrap;
+    padding: 0 10px;
+  }
 }
 
 @media (max-width: 480px) {
   #word-input-container input { width: 200px; }
 }
 
-/* === Shake Animation === */
-.shake {
-  animation: shake 0.5s;
+@media (max-height: 500px) and (orientation: landscape) {
+  .game-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 10px;
+  }
+
+  .hangman-figure {
+    width: 150px;
+    height: 180px;
+  }
+
+  #word-display, #keyboard, #hint-btn {
+    margin: 0;
+  }
+  
+  #keyboard {
+    max-width: 350px;
+    gap: 3px;
+  }
+
+  .key {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
 }
 
-@keyframes shake {
-  0% { transform: translate(2px, 2px) rotate(0deg); }
-  10% { transform: translate(-2px, -4px) rotate(-1deg); }
-  20% { transform: translate(-6px, 0px) rotate(1deg); }
-  30% { transform: translate(6px, 4px) rotate(0deg); }
-  40% { transform: translate(2px, -2px) rotate(1deg); }
-  50% { transform: translate(-2px, 4px) rotate(-1deg); }
-  60% { transform: translate(-6px, 2px) rotate(0deg); }
-  70% { transform: translate(6px, 2px) rotate(-1deg); }
-  80% { transform: translate(-2px, -2px) rotate(1deg); }
-  90% { transform: translate(2px, 4px) rotate(0deg); }
-  100% { transform: translate(2px, -4px) rotate(-1deg); }
+/* === SVG Draw Animation === */
+#figure-head {
+  stroke-dasharray: 126;
+  stroke-dashoffset: 126;
+}
+#figure-body {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+}
+#figure-arm-left, #figure-arm-right {
+  stroke-dasharray: 29;
+  stroke-dashoffset: 29;
+}
+#figure-leg-left, #figure-leg-right {
+  stroke-dasharray: 37;
+  stroke-dashoffset: 37;
+}
+
+.draw-in {
+  opacity: 1;
+  animation: draw 0.5s linear forwards;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
 }

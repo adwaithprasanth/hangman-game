@@ -62,6 +62,8 @@ function startGame(customWord = null) {
   wrongGuessCount = 0;
   hintsLeft = 3;
   
+  figureParts.forEach(part => part.classList.remove('draw-in'));
+  
   hintBtn.disabled = false;
   updateHintDisplay();
 
@@ -95,9 +97,10 @@ function displayWord() {
 }
 
 function updateWrongGuessesDisplay() {
-  figureParts.forEach((part, index) => {
-    part.style.display = index < wrongGuessCount ? 'block' : 'none';
-  });
+  if (wrongGuessCount > 0 && wrongGuessCount <= figureParts.length) {
+    const partToDraw = figureParts[wrongGuessCount - 1];
+    partToDraw.classList.add('draw-in');
+  }
 
   if (wrongGuessCount === figureParts.length) {
     finalMessage.innerText = `😕 You Lost. The word was: "${selectedWord}"`;
@@ -214,4 +217,4 @@ hintBtn.addEventListener('click', giveHint);
 window.addEventListener('keydown', handlePhysicalKeyboard);
 
 // --- Init ---
-showModeSelection();
+showModeeSelection();
