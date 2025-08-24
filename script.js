@@ -5,6 +5,8 @@ const figureParts = document.querySelectorAll('.figure-part');
 const popupContainer = document.getElementById('popup-container');
 const finalMessage = document.getElementById('final-message');
 const playAgainBtn = document.getElementById('play-again-btn');
+const hintBtn = document.getElementById('hint-btn');
+const hintHeartsSpan = document.getElementById('hint-hearts');
 
 // Setup Elements
 const setupContainer = document.getElementById('setup-container');
@@ -24,6 +26,7 @@ const words = ['javascript', 'programming', 'hangman', 'developer', 'interface']
 let selectedWord = '';
 let correctLetters = [];
 let wrongGuessCount = 0;
+let hintsLeft = 3;
 
 // --- Helper Functions ---
 function triggerConfetti() {
@@ -40,10 +43,24 @@ function triggerShake() {
   setTimeout(() => gameContainer.classList.remove("shake"), 500);
 }
 
+function updateHintDisplay() {
+    const redHearts = '❤️'.repeat(hintsLeft);
+    const blackHearts = '🖤'.repeat(3 - hintsLeft);
+    hintHeartsSpan.innerHTML = redHearts + blackHearts;
+
+    if (hintsLeft === 0) {
+        hintBtn.disabled = true;
+    }
+}
+
 // --- Game Logic ---
 function startGame(customWord = null) {
   correctLetters = [];
   wrongGuessCount = 0;
+  hintsLeft = 3;
+  
+  hintBtn.disabled = false;
+  updateHintDisplay();
 
   selectedWord = customWord ? customWord.toLowerCase() : words[Math.floor(Math.random() * words.length)];
 
@@ -93,6 +110,7 @@ function createKeyboard() {
     const key = document.createElement('button');
     key.className = 'key';
     key.textContent = letter;
+    key.dataset.key = letter;
     key.addEventListener('click', () => handleGuess(letter, key));
     keyboardDiv.appendChild(key);
   });
@@ -117,6 +135,42 @@ function showModeSelection() {
   modeSelection.classList.remove('hidden');
 }
 
+function giveHint() {
+    const unguessedLetters = selectedWord
+        .split('')
+        .filter(letter => !correctLetters.includes(letter));
+
+    if (hintsLeft > 0 && unguessedLetters.length > 0) {
+        hintsLeft--;
+
+        const hintLetter = unguessedLetters[Math.floor(Math.random() * unguessedLetters.length)];
+        correctLetters.push(hintLetter);
+
+        const keyElement = keyboardDiv.querySelector(`[data-key='${hintLetter}']`);
+        if (keyElement) {
+            keyElement.disabled = true;
+        }
+        
+        displayWord();
+        updateHintDisplay();
+    }
+}
+
+function handlePhysicalKeyboard(e) {
+    if (e.repeat) return;
+    const letter = e.key.toLowerCase();
+    
+    if (letter >= 'a' && letter <= 'z') {
+        const keyElement = keyboardDiv.querySelector(`[data-key='${letter}']`);
+        
+        if (keyElement && !keyElement.disabled) {
+            keyElement.classList.add('pressed');
+            setTimeout(() => keyElement.classList.remove('pressed'), 200);
+            keyElement.click();
+        }
+    }
+}
+
 // --- Event Listeners ---
 vsComputerBtn.addEventListener('click', () => startGame());
 challengeBtn.addEventListener('click', () => {
@@ -137,6 +191,8 @@ startCustomGameBtn.addEventListener('click', () => {
   }
 });
 playAgainBtn.addEventListener('click', showModeSelection);
+hintBtn.addEventListener('click', giveHint);
+window.addEventListener('keydown', handlePhysicalKeyboard);
 
 // --- Init ---
 showModeSelection();

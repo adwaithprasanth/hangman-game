@@ -101,6 +101,25 @@ h1, h2 {
   cursor: not-allowed;
 }
 
+.key.pressed {
+    transform: scale(1.2);
+    background-color: var(--accent-color);
+}
+
+/* === Hint Button === */
+#hint-btn {
+    margin-bottom: 15px;
+    font-size: 14px;
+    padding: 10px 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#hint-btn:disabled {
+    cursor: not-allowed;
+}
+
 /* === Popup === */
 .popup-container {
   background-color: rgba(0, 0, 0, 0.6);

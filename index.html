@@ -6,9 +6,7 @@
     <title>Hangman Game</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
-    <!-- Confetti Library -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
@@ -41,16 +39,14 @@
                 <line x1="60" y1="20" x2="60" y2="230" />
                 <line x1="20" y1="230" x2="100" y2="230" />
 
-                <circle cx="140" cy="70" r="20" class="figure-part" />
-                <line x1="140" y1="90" x2="140" y2="150" class="figure-part" />
-                <line x1="140" y1="120" x2="120" y2="100" class="figure-part" />
-                <line x1="140" y1="120" x2="160" y2="100" class="figure-part" />
-                <line x1="140" y1="150" x2="120" y2="180" class="figure-part" />
-                <line x1="140" y1="150" x2="160" y2="180" class="figure-part" />
-            </svg>
+                <circle cx="140" cy="70" r="20" class="figure-part" /> <line x1="140" y1="90" x2="140" y2="150" class="figure-part" /> <line x1="140" y1="120" x2="120" y2="100" class="figure-part" /> <line x1="140" y1="120" x2="160" y2="100" class="figure-part" /> <line x1="140" y1="150" x2="120" y2="180" class="figure-part" /> <line x1="140" y1="150" x2="160" y2="180" class="figure-part" /> </svg>
 
             <div id="word-display"></div>
-
+            
+            <button id="hint-btn" class="mode-btn secondary">
+                Hint <span id="hint-hearts"></span>
+            </button>
+            
             <div id="keyboard"></div>
         </div>
 
