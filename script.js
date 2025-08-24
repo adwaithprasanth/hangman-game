@@ -13,6 +13,7 @@ const setupContainer = document.getElementById('setup-container');
 const modeSelection = document.getElementById('mode-selection');
 const wordInputContainer = document.getElementById('word-input-container');
 const mainGameContainer = document.getElementById('main-game-container');
+const passDeviceContainer = document.getElementById('pass-device-container');
 
 // Buttons & Inputs
 const vsComputerBtn = document.getElementById('vs-computer-btn');
@@ -20,6 +21,7 @@ const challengeBtn = document.getElementById('challenge-btn');
 const backBtn = document.getElementById('back-btn');
 const customWordInput = document.getElementById('custom-word-input');
 const startCustomGameBtn = document.getElementById('start-custom-game-btn');
+const readyBtn = document.getElementById('ready-btn');
 
 // --- Game State ---
 const words = ['javascript', 'programming', 'hangman', 'developer', 'interface'];
@@ -27,6 +29,7 @@ let selectedWord = '';
 let correctLetters = [];
 let wrongGuessCount = 0;
 let hintsLeft = 3;
+let customWordForFriend = '';
 
 // --- Helper Functions ---
 function triggerConfetti() {
@@ -64,7 +67,6 @@ function startGame(customWord = null) {
 
   selectedWord = customWord ? customWord.toLowerCase() : words[Math.floor(Math.random() * words.length)];
 
-  setupContainer.classList.add('hidden');
   mainGameContainer.classList.remove('hidden');
 
   popupContainer.style.display = 'none';
@@ -131,6 +133,7 @@ function handleGuess(letter, keyElement) {
 function showModeSelection() {
   mainGameContainer.classList.add('hidden');
   wordInputContainer.classList.add('hidden');
+  passDeviceContainer.classList.add('hidden');
   setupContainer.classList.remove('hidden');
   modeSelection.classList.remove('hidden');
 }
@@ -172,24 +175,40 @@ function handlePhysicalKeyboard(e) {
 }
 
 // --- Event Listeners ---
-vsComputerBtn.addEventListener('click', () => startGame());
+vsComputerBtn.addEventListener('click', () => {
+    setupContainer.classList.add('hidden');
+    startGame();
+});
+
 challengeBtn.addEventListener('click', () => {
   modeSelection.classList.add('hidden');
   wordInputContainer.classList.remove('hidden');
 });
+
 backBtn.addEventListener('click', () => {
   wordInputContainer.classList.add('hidden');
   modeSelection.classList.remove('hidden');
 });
+
 startCustomGameBtn.addEventListener('click', () => {
   const word = customWordInput.value.trim();
   if (word && /^[a-zA-Z]+$/.test(word)) {
-    startGame(word);
+    customWordForFriend = word;
     customWordInput.value = '';
+    
+    setupContainer.classList.add('hidden');
+    passDeviceContainer.classList.remove('hidden');
   } else {
     alert('Please enter a valid word (letters only).');
   }
 });
+
+readyBtn.addEventListener('click', () => {
+    passDeviceContainer.classList.add('hidden');
+    startGame(customWordForFriend);
+});
+
+
 playAgainBtn.addEventListener('click', showModeSelection);
 hintBtn.addEventListener('click', giveHint);
 window.addEventListener('keydown', handlePhysicalKeyboard);

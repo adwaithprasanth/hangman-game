@@ -170,19 +170,19 @@ h1, h2 {
     background: #1f1f1f;
     color: var(--text-color);
     border: 3px solid var(--text-color);
-    border-radius: 0; /* Sharp corners for the retro feel */
+    border-radius: 0;
     padding: 15px;
     width: 300px;
     font-size: 18px;
     font-family: 'Poppins', sans-serif;
     text-align: center;
-    outline: none; /* Removes the default blue glow on click */
+    outline: none;
     transition: all 0.2s ease;
     margin: 20px auto;
 }
 
 #word-input-container input:focus {
-    border-color: var(--accent-color); /* Highlights with your theme color */
+    border-color: var(--accent-color);
     box-shadow: 0 0 10px var(--accent-color);
 }
 
@@ -212,6 +212,15 @@ h1, h2 {
 .mode-btn.secondary {
   background-color: #444;
   color: var(--text-color);
+}
+
+#pass-device-container {
+  text-align: center;
+}
+
+#pass-device-container p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
 }
 
 /* === Mobile Tweaks === */
