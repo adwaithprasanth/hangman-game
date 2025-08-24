@@ -25,6 +25,14 @@ body {
 h1, h2 {
   margin-bottom: 0;
   font-family: 'Press Start 2P', monospace;
+  /* Add these two lines for fluid font sizes */
+  font-size: clamp(1.25rem, 5vw, 2rem); /* For h1 */
+  line-height: 1.4; /* Improves readability */
+}
+
+h2 {
+  /* Make h2 slightly smaller */
+  font-size: clamp(1rem, 4vw, 1.5rem);
 }
 
 /* === Game Container === */
@@ -225,6 +233,12 @@ h1, h2 {
 
 /* === Mobile Tweaks === */
 @media (max-width: 768px) {
+
+  #word-display {
+    flex-wrap: wrap;
+    padding: 0 10px;
+  }
+
   .game-container {
     width: 90%;
     padding: 10px;
@@ -248,8 +262,6 @@ h1, h2 {
 }
 
 @media (max-width: 480px) {
-  h1 { font-size: 20px; }
-  h2 { font-size: 16px; }
   #word-input-container input { width: 200px; }
 }
 
